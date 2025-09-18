@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages (npm install)
+name: Deploy to GitHub Pages (single artifact)
 
 on:
   push:
@@ -18,24 +18,23 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Install deps (no lockfile present)
+      - name: Install deps
         run: npm install
 
       - name: Build (static export)
         run: npm run build
 
-      - name: Upload artifact
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
+          name: site
 
   deploy:
     needs: build
@@ -47,3 +46,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: site
