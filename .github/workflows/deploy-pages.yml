@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages (npm install)
 
 on:
   push:
@@ -26,8 +26,8 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install deps
-        run: npm ci
+      - name: Install deps (no lockfile present)
+        run: npm install
 
       - name: Build (static export)
         run: npm run build
