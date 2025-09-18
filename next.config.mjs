@@ -9,6 +9,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  output: 'export', 
+   basePath: '/Sbnikitha.github.io',
 }
 
 export default nextConfig
