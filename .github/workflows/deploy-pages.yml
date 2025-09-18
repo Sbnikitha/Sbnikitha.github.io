@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages (single artifact)
+name: Deploy to GitHub Pages (Next.js export + .nojekyll)
 
 on:
   push:
@@ -29,6 +29,9 @@ jobs:
 
       - name: Build (static export)
         run: npm run build
+
+      - name: Add .nojekyll (serve _next assets on Pages)
+        run: touch ./out/.nojekyll
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
